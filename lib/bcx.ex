@@ -4,7 +4,7 @@ defmodule BCX do
   """
 
   def start() do
-    IO.puts "Hello BCX"
+    IO.puts "\nHello BCX \n"
 
     BCX.Connect.checkConnection()
 
