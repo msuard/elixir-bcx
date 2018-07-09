@@ -7,7 +7,7 @@ defmodule BCX.Connect do
 
   def checkConnection() do
     {:ok, conn} = Ethereumex.HttpClient.web3_client_version
-    IO.puts "BCX connected to: " <> conn
+    IO.puts "BCX connected to: " <> conn <>"\n"
   end
 
   def getBalance(address) do

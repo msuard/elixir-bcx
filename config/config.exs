@@ -31,3 +31,4 @@ use Mix.Config
 
 config :ethereumex,
        url: "http://localhost:7545"
+config :bcx, PORT: 8000
