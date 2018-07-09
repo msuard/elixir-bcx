@@ -11,18 +11,19 @@ defmodule BCX.Router do
 
   # ROUTES:
   get "/balance" do
-   case getBalance(conn) do
+    queryParams = fetchQuery(conn).query_params["address"]
+    case getBalance(queryParams) do
      {:error, errorMsg} -> send_resp(conn, 400, errorMsg)
      {:ok, balance} -> send_resp(conn, 200, "Balance = " <> balance <> " ETH")
    end
   end
 
-  defp fetchQuery(conn) do
+  def fetchQuery(conn) do
      fetch_query_params(conn)
   end
 
-  defp getBalance(conn) do
-    case fetchQuery(conn).query_params["address"] do
+  def getBalance(queryParams) do
+    case queryParams do
       nil ->
         errorMsg = "Error: missing Ethereum address in query"
         {:error, errorMsg}
