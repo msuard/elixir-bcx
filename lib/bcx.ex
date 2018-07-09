@@ -3,16 +3,14 @@ defmodule BCX do
   Documentation for BCX.
   """
 
-  @doc """
-  Hello world.
+  def start() do
+    IO.puts "Hello BCX"
 
-  ## Examples
+    BCX.Connect.checkConnection()
 
-      iex> BCX.hello
-      :world
-
-  """
-  def hello do
-    :world
+    BCX.Supervisor.start_link(name: BCX.Supervisor)
   end
+
+
+
 end
