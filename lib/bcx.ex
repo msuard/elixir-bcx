@@ -3,16 +3,17 @@ defmodule BCX do
   Documentation for BCX.
   """
 
-  @doc """
-  Hello world.
+  def start() do
+    BCX.Supervisor.start_link(name: BCX.Supervisor)
+    IO.puts "Hello BCX"
+    BCX.connect()
+  end
 
-  ## Examples
-
-      iex> BCX.hello
-      :world
-
-  """
-  def hello do
-    :world
+  def connect() do
+     case DynamicSupervisor.start_child(BCX.ConnectSupervisor, BCX.Connect) do
+        {:ok, _pid} -> "BCX connected to Ethereum node"
+        {:error, error} -> error
+        _ -> "Unknown BCX connection error!"
+     end
   end
 end

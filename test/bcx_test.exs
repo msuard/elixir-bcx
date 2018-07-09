@@ -2,7 +2,11 @@ defmodule BCXTest do
   use ExUnit.Case
   doctest BCX
 
-  test "greets the world" do
-    assert BCX.hello() == :world
+  test "starts" do
+    BCX.start()
+  end
+
+  test "connects" do
+    BCX.connect()
   end
 end
