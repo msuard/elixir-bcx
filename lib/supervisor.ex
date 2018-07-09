@@ -7,7 +7,9 @@ defmodule BCX.Supervisor do
 
   def init(:ok) do
     children = [
-      {DynamicSupervisor, name: BCX.ConnectSupervisor, strategy: :one_for_one},
+     # {DynamicSupervisor, name: BCX.ConnectSupervisor, strategy: :one_for_one},
+      {Task.Supervisor, name: BCX.Server.TaskSupervisor},
+      {Plug.Adapters.Cowboy, scheme: :http, plug: BCX.Router, options: [port: 8000]}
     ]
 
     Supervisor.init(children, strategy: :one_for_all)
