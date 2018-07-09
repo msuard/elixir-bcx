@@ -11,10 +11,15 @@ defmodule BCX.Router do
 
   # ROUTES:
   get "/balance" do
+    IO.puts "/GET /balance?" <> conn.query_string <> "\n"
     queryParams = fetchQuery(conn).query_params["address"]
     case getBalance(queryParams) do
-     {:error, errorMsg} -> send_resp(conn, 400, errorMsg)
-     {:ok, balance} -> send_resp(conn, 200, "Balance = " <> balance <> " ETH")
+     {:error, errorMsg} ->
+       IO.puts "400, " <> errorMsg <> "\n"
+       send_resp(conn, 400, errorMsg)
+     {:ok, balance} ->
+       IO.puts "200, Balance = " <> balance <> " ETH\n"
+       send_resp(conn, 200, "Balance = " <> balance <> " ETH")
    end
   end
 
@@ -28,8 +33,12 @@ defmodule BCX.Router do
         errorMsg = "Error: missing Ethereum address in query"
         {:error, errorMsg}
       address ->
-        balance = Float.to_string(Float.round(BCX.Connect.getBalance(address)*1.0e-18, 1))
-        {:ok, balance}
+        case BCX.Connect.getBalance(address) do
+          {:error, msg} -> {:error, msg}
+          {:ok, bal} ->
+            balance = Float.to_string(Float.round(bal*1.0e-18, 1))
+            {:ok, balance}
+        end
       end
   end
 end

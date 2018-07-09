@@ -13,10 +13,11 @@ defmodule BCX.Connect do
 
   def getBalance(address) do
     case Ethereumex.HttpClient.eth_get_balance(address) do
-      {:error, :econnrefused} -> "Error: connection refused"
+      {:error, :econnrefused} -> {:error, "Error: connection refused"}
+      {:error, msg} -> {:error, "Error: make sure you are requesting ETH balance for a valid Ethereum address"}
       {:ok, hexBalance} ->
         {balance, _} = Integer.parse(String.slice(hexBalance, 2..-1), 16)
-        balance
+        {:ok, balance}
     end
   end
 

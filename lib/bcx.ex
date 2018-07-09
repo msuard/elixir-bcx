@@ -8,12 +8,13 @@ defmodule BCX do
 
     connection = BCX.Connect.checkConnection()
 
-
     BCX.Supervisor.start_link(name: BCX.Supervisor)
 
-    connection
+
+    if (Application.get_env(:bcx, :env) == :test) do
+      connection
+    else
+      :ok
+    end
   end
-
-
-
 end
