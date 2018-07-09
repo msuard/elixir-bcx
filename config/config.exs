@@ -30,5 +30,6 @@ use Mix.Config
 #     import_config "#{Mix.env}.exs"
 
 config :ethereumex,
-       url: "http://localhost:7545"
-config :bcx, PORT: 8000
+       # url: "http://localhost:7545"
+       url: "https://mainnet.infura.io/XGPoKHYs4jXnuqMj2fyd"
+config :bcx, PORT: 8000, env: Mix.env
