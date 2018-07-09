@@ -3,7 +3,7 @@ defmodule RouterTest do
   import Mock
 
   test "getBalance when proper ETH address is passed as argument" do
-    with_mock BCX.Connect, [getBalance: fn _ -> 1000000000000000000 end] do
+    with_mock BCX.Connect, [getBalance: fn _ -> {:ok, 1000000000000000000} end] do
       balance = BCX.Router.getBalance("Oxaddress")
       assert balance == {:ok, "1.0"}
     end
