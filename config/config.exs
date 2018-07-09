@@ -31,5 +31,5 @@ use Mix.Config
 
 config :ethereumex,
        # url: "http://localhost:7545"
-       url: "https://mainnet.infura.io/XGPoKHYs4jXnuqMj2fyd"
+       url: "https://mainnet.infura.io/" # <-- Enter your Infura API key here
 config :bcx, PORT: 8000, env: Mix.env
